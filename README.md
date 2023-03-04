@@ -1,6 +1,7 @@
 # easyexcel
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+![https://opensource.org/licenses/MIT](https://img.shields.io/badge/license-MIT-green)
 ![easyexcel](https://img.shields.io/badge/readme%20style-easyexcel-brightgreen)
 
 一个go语言开发的简单易用excel工具包
