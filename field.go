@@ -39,6 +39,7 @@ type Fields map[int]*Field
 type Field struct {
 	name string //字段名
 	typ  string //字段类型(all导入导出、import导入、export导出)
+	sort int    //排序,默认按照字段顺序排序;0->∞
 	tags string //tag标签
 
 	column          string            //excel列名
@@ -53,9 +54,10 @@ type Field struct {
 	combo        []string //下拉框
 }
 
-func NewField(name, tag string) Field {
+func NewField(name, tag string, sort int) Field {
 	return Field{
 		name:            name,
+		sort:            sort,
 		tags:            tag,
 		typ:             ALL,    //默认导入导出
 		columnType:      STRING, //默认导出类型文本
@@ -169,7 +171,7 @@ func fieldsFromStruct[T any]() ([]Field, error) {
 			continue
 		}
 
-		f := NewField(fieldName, tag)
+		f := NewField(fieldName, tag, i)
 		if err := f.parseTag(); err != nil {
 			return nil, err
 		}

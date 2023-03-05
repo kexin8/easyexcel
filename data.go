@@ -82,9 +82,6 @@ func structToRow[T any](data T, fields Fields) (row []string, err error) {
 		}
 
 		fv := refValue.FieldByName(f.name)
-		if !fv.CanSet() {
-			continue
-		}
 
 		var (
 			v string
@@ -101,8 +98,11 @@ func structToRow[T any](data T, fields Fields) (row []string, err error) {
 			v = strconv.FormatFloat(fv.Float(), 'f', -1, 64)
 		case reflect.Bool:
 			v = strconv.FormatBool(fv.Bool())
+		case reflect.Struct:
+			v = fv.String()
 		default:
 			//TODO: 暂时不支持其他类型
+			v = fv.String()
 		}
 
 		if v == "" {
@@ -116,7 +116,7 @@ func structToRow[T any](data T, fields Fields) (row []string, err error) {
 			}
 		}
 
-		row = append(row, v)
+		row[f.sort] = v
 	}
 
 	return
