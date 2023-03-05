@@ -1,7 +1,7 @@
 # easyexcel
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
-![https://opensource.org/licenses/MIT](https://img.shields.io/badge/license-MIT-green)
+![https://opensource.org/licenses/MIT](https://img.shields.io/badge/license-BSD-green)
 [![Go Reference](https://pkg.go.dev/badge/github.com/kexin8/easyexcel.svg)](https://pkg.go.dev/github.com/kexin8/easyexcel)
 
 一个go语言开发的简单易用excel工具包
@@ -74,4 +74,4 @@ Small note: If editing the README, please conform to the [standard-readme](https
 
 ## License
 
-MIT © 2023 zhengzi
+This program is under the terms of the BSD 3-Clause License. See https://opensource.org/licenses/BSD-3-Clause.
