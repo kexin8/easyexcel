@@ -34,7 +34,7 @@ const (
 	separator = ";"
 )
 
-type Fields map[int]Field
+type Fields map[int]*Field
 
 type Field struct {
 	name string //字段名
@@ -96,8 +96,8 @@ func (f *Field) parseTag() error {
 				for _, converter := range converters {
 					kv := strings.Split(converter, "=")
 					if len(kv) == 2 {
-						f.readConverters[kv[0]] = kv[1]
-						f.writeConverters[kv[1]] = kv[0]
+						f.readConverters[kv[1]] = kv[0]
+						f.writeConverters[kv[0]] = kv[1]
 					}
 				}
 			case TagHeight:
@@ -139,7 +139,7 @@ func fieldsFromTitls[T any](titles []string) (fs Fields, err error) {
 	for i, title := range titles {
 		for _, field := range fields {
 			if field.column == strings.TrimSpace(title) {
-				fs[i] = field
+				fs[i] = &field
 				break
 			}
 		}
@@ -152,6 +152,11 @@ func fieldsFromTitls[T any](titles []string) (fs Fields, err error) {
 func fieldsFromStruct[T any]() ([]Field, error) {
 	var fields []Field
 	t := reflect.TypeOf(new(T))
+
+	for t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+
 	for i := 0; i < t.NumField(); i++ {
 		field := t.Field(i)
 		if field.Anonymous {
